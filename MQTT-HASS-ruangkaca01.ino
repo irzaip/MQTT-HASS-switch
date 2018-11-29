@@ -151,6 +151,38 @@ void setup() {
 }
 
 void loop() {
+  switch (Ethernet.maintain())
+  {
+    case 1:
+      //renewed fail
+      Serial.println("Error: renewed fail");
+      break;
+
+    case 2:
+      //renewed success
+      Serial.println("Renewed success");
+
+      //print your local IP address:
+      printIPAddress();
+      break;
+
+    case 3:
+      //rebind fail
+      Serial.println("Error: rebind fail");
+      break;
+
+    case 4:
+      //rebind success
+      Serial.println("Rebind success");
+
+      //print your local IP address:
+      printIPAddress();
+      break;
+
+    default:
+      //nothing happened
+      break;
+  }
 
   if (!mqttClient.connected()) {
     reconnect();
